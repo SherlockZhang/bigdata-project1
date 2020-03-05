@@ -2,14 +2,15 @@
 from src import api
 from sys import argv
 import json
+from src.load_elasticsearch import load_elasticsearch
 
 def main():
     #input file
-    input_fn = argv[1]
+    input_fn = 'input.txt'#argv[1]
     
     #ouptut file
     try:
-        output_file = argv[2]
+        output_file = 'output2.json'#argv[2]
     except Exception:
         output_file = "output"
     
@@ -22,13 +23,18 @@ def main():
     num_page = int(num_page)
 
     #get nycdata from sodapy and write to output file
+    output_data = []
     for i in range(num_page):
-            output_data=api.get_data(page_size,i) 
-            with open(output_file, 'a') as outfile:
-                json.dump(output_data, outfile)
-                outfile.write("\n")
+            temp_data=api.get_data(page_size,i) 
+            output_data.extend(temp_data)
+    with open(output_file, 'w') as outfile:
+        json.dump(output_data, outfile)
+        #outfile.write("\n")
+        
+    load_elasticsearch("output2.json", "nyc_index")
 
-
+    #return output_data
     
 if __name__ == '__main__':
     main()
+    
