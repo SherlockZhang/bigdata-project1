@@ -6,13 +6,13 @@ from src.load_elasticsearch import load_elasticsearch
 
 def main():
     #input file
-    input_fn = 'input.txt'#argv[1]
+    input_fn = argv[1]
     
     #ouptut file
     try:
-        output_file = 'output2.json'#argv[2]
+        output_file = argv[2]
     except Exception:
-        output_file = "output"
+        output_file = "output.json"
     
     #read input argument
     with open(input_fn, "r") as fh:
@@ -29,9 +29,10 @@ def main():
             output_data.extend(temp_data)
     with open(output_file, 'w') as outfile:
         json.dump(output_data, outfile)
-        #outfile.write("\n")
-        
-    load_elasticsearch("output2.json", "nyc_index")
+
+    #load data into elasticsearch    
+    index_name = "nyc_index2"    
+    load_elasticsearch(output_file, index_name)
 
     #return output_data
     
