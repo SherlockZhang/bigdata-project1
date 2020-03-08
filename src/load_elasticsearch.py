@@ -11,9 +11,11 @@ def load_elasticsearch( data_file, index_name):
     for i in range(len(doc_list)):
         try:
             doc_list[i]['reduction_amount']= int(doc_list[i]['reduction_amount'])
+            doc_list[i]['fine_amount']= int(doc_list[i]['fine_amount'])
         except:
-            pass
-            doc_list[i]['timestamp'] = datetime.strptime(doc_list[0]['issue_date'],"%m/%d/%Y")
+            doc_list[i]['reduction_amount']= 0
+            doc_list[i]['fine_amount'] = 0
+        doc_list[i]['timestamp'] = datetime.strptime(doc_list[i]['issue_date'],"%m/%d/%Y")
     
     try:
         print("\n Attempting to index the list of docs")
