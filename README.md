@@ -35,4 +35,4 @@ Once the data is loaded into ElasticSearch, we can start to use Kibana to visual
 
 1: The first figure shows the frequency of the most several violation type. The most violation type is: PHTO SCHOOL ZN. And the second most violation type is: NO PARKING-STREET CLEANING.
 
-![scrnshot](https://raw.githubusercontent.com/SherlockZhang/bigdata-project1/master/violation type.png)
+![scrnshot](https://raw.githubusercontent.com/SherlockZhang/bigdata-project1/master/violation_type.png)
